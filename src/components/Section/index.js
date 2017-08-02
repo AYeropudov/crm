@@ -4,6 +4,7 @@ import Footer from "../Footer";
 import PageContent from "./PageContent";
 import {HashRouter, Route} from 'react-router-dom'
 import DashBoard from "../../App/Dashboard";
+import GraphComponent from "../../App/GraphComponent";
 
 
 class Section extends Component{
@@ -18,6 +19,7 @@ class Section extends Component{
                     <rt>
                         <Route exact={ true }  path="/" component={PageContent}/>
                         <Route path="/dashboard" component={DashBoard}/>
+                        <Route path="/question" component={GraphComponent}/>
                     </rt>
                 </HashRouter>
                 <Footer/>

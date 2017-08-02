@@ -23,16 +23,16 @@ class NavbarVelonic extends Component {
                     href:'#',
                     key:'m2',
                     icon: "ion-flask",
-                    label: "FLASK",
+                    label: "LAB",
                     type: "nested",
                     active: false,
                     parentKey: false,
                     sub: {
                         'smenu1': {
-                            href:'#',
+                            href:'#question',
                             key:'smenu1',
                             icon: "",
-                            label: "Sub1",
+                            label: "Question GraphComponent",
                             type: "simple",
                             active: false,
                             parentKey:"m2"
