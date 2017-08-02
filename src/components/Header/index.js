@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import SearchForm from "./SearchForm";
+import LeftBar from "./LeftBar";
+import RigthBar from "./RightBar";
 
 class Header extends Component{
     constructor(props){
@@ -15,6 +17,8 @@ class Header extends Component{
                     <span className="icon-bar"></span>
                 </button>
                 <SearchForm/>
+                <LeftBar/>
+                <RigthBar/>
             </header>
         )
 

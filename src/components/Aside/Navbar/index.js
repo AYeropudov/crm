@@ -10,6 +10,7 @@ class NavbarVelonic extends Component {
             active: true,
             menus: {
                 "m1": {
+                    href:'#dashboard',
                     key:'m1',
                     icon: "ion-home",
                     label: "Dashboard",
@@ -19,6 +20,7 @@ class NavbarVelonic extends Component {
                     parentKey: false
                 },
                 "m2": {
+                    href:'#',
                     key:'m2',
                     icon: "ion-flask",
                     label: "FLASK",
@@ -27,6 +29,7 @@ class NavbarVelonic extends Component {
                     parentKey: false,
                     sub: {
                         'smenu1': {
+                            href:'#',
                             key:'smenu1',
                             icon: "",
                             label: "Sub1",
@@ -35,6 +38,7 @@ class NavbarVelonic extends Component {
                             parentKey:"m2"
                         },
                         'smenu2': {
+                            href:'#',
                             key:'smenu2',
                             icon: "",
                             label: "Sub2",

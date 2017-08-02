@@ -23,7 +23,7 @@ class App extends Component {
     return (
       <div>
           <Aside collapsed={this.state.aside}/>
-          <Section handleCollapseSide={this.collapseAside}/>
+          <Section content={<div><h1>toto</h1></div>} handleCollapseSide={this.collapseAside}/>
       </div>
     );
   }

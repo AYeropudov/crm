@@ -16,7 +16,7 @@ class NavItem extends Component{
 
         return(
             <li className={ classesMain } >
-                <a href="#" onClick={()=>this.props.onClickHandle(this.state.key, this.state.parentKey)}>
+                <a href={this.state.href} onClick={()=>this.props.onClickHandle(this.state.key, this.state.parentKey)}>
                     <i className={this.state.icon}></i>
                     <span className="nav-label">{this.state.label}</span>
                 </a>
