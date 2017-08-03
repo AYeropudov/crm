@@ -8,7 +8,7 @@ class NavItemSub extends Component{
     }
 
     render(){
-        let classesMain = "";
+        let classesMain = "has-submenu";
 
         if (this.state.active){
             classesMain +=' active';

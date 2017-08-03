@@ -5,6 +5,7 @@ import PageContent from "./PageContent";
 import {HashRouter, Route} from 'react-router-dom'
 import DashBoard from "../../App/Dashboard";
 import GraphComponent from "../../App/GraphComponent";
+import Scripts from "../../App/Scripts";
 
 
 class Section extends Component{
@@ -20,6 +21,7 @@ class Section extends Component{
                         <Route exact={ true }  path="/" component={PageContent}/>
                         <Route path="/dashboard" component={DashBoard}/>
                         <Route path="/question" component={GraphComponent}/>
+                        <Route path="/scripts" component={Scripts}/>
                     </rt>
                 </HashRouter>
                 <Footer/>

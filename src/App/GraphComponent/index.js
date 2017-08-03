@@ -1,10 +1,43 @@
 import React, {Component} from 'react';
-import {Sigma, RandomizeNodePositions, RelativeSize} from 'react-sigma';
 import Graph from 'react-graph-vis' ;
+import axios from 'axios'
 class GraphComponent extends Component{
+    constructor(props){
+        super(props);
+
+        this.state = {
+            answers:[],
+            graph:{nodes:[], edges:[]},
+        }
+
+        axios({
+            method:'get',
+            url:'http://localhost:5000/answers',
+            responseType:'json'
+        })
+            .then((response) => this.setAnswers(response.data));
+        axios({
+            method:'get',
+            url:'http://localhost:5000/scripts/5982f9f509531143d0c79aba',
+            responseType:'json'
+        })
+            .then((response) => this.setGraph(response.data));
+
+
+    }
+
+
+    setGraph(data){
+        this.setState({graph:{nodes:data.nodes, edges:data.edges}});
+    }
+
+    setAnswers(data){
+        this.setState({answers:data});
+    }
     render(){
         let myGraph = {
             nodes:[
+                { "id": "5982cc7e09531124c4ed7289", "label": "Нет."},
                 {id:"q1", label:"Question1"},
                 {id:"q2", label:"Question2"},
                 {id:"q3", label:"Question3"},
@@ -31,6 +64,13 @@ class GraphComponent extends Component{
             layout: {
                 hierarchical: true
             },
+            nodes:{
+                shape:'box',
+                widthConstraint:{
+                    minimum: 100,
+                    maximum: 300,
+                }
+            },
             edges: {
                 color: "#E63E3C"
             }
@@ -56,7 +96,7 @@ class GraphComponent extends Component{
                             <div className="portlet-body">
                                 <div className="row">
                                     <div className="col-md-12">
-                                        <Graph graph={myGraph} options={options}/>
+                                        <Graph graph={this.state.graph} options={options}/>
                                     </div>
                                 </div>
                             </div>

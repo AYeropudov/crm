@@ -38,8 +38,17 @@ class NavbarVelonic extends Component {
                             parentKey:"m2"
                         },
                         'smenu2': {
-                            href:'#',
+                            href:'#scripts',
                             key:'smenu2',
+                            icon: "",
+                            label: "Скрипты",
+                            type: "simple",
+                            active: false,
+                            parentKey:"m2"
+                        },
+                        'smenu3': {
+                            href:'#',
+                            key:'smenu3',
                             icon: "",
                             label: "Sub2",
                             type: "simple",
