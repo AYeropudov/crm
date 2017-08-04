@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 class ScriptElement extends Component{
     constructor(props){
         super(props);
+
     }
     render(){
         return(
@@ -10,7 +11,7 @@ class ScriptElement extends Component{
                 <div className="col-md-12">
                     <div className="panel panel-default">
                         <div className="panel-heading">
-                            <h3 className="panel-title">{this.props.title}</h3>
+                            <h3 className="panel-title"><a href={ "#script/" + this.props.id}>{this.props.title}</a></h3>
                         </div>
                         <div className="panel-body">
                             <div className="row">
@@ -22,6 +23,7 @@ class ScriptElement extends Component{
                                     </div>
                                 </div>
                             </div>
+                            <a href={ "#start/" + this.props.id}>НАЧАТЬ ОПРОС</a>
                         </div>
                     </div>
                 </div>
