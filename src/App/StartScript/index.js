@@ -15,7 +15,7 @@ class StartScript extends Component{
                     }
                 ]
         }
-        let urlToScript = "http://localhost:5000/startscript/" + this.props.id;
+        let urlToScript = "/api/startscript/" + this.props.id;
         axios({
             url: urlToScript,
             method : 'GET',
@@ -27,7 +27,7 @@ class StartScript extends Component{
     }
     getNextQuestion(id){
         // console.log(id);
-        let urlToScript = "http://localhost:5000/question/" + id;
+        let urlToScript = "/api/question/" + id;
         axios({
             url: urlToScript,
             method : 'GET',

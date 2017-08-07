@@ -6,7 +6,7 @@ class Scripts extends Component{
         super(props);
         axios({
             method:'get',
-            url:'http://localhost:5000/scripts',
+            url:'/api/scripts',
             responseType:'json'
         })
             .then((response) => this.setScripts(response.data));

@@ -11,7 +11,7 @@ class ScriptView extends Component{
             treeData: [{ title: 'Chicken', children: [ { title: 'Egg' }]}]
         };
         axios({
-            url: 'http://localhost:5000/script/5982f9f509531143d0c79aba',
+            url: '/api/script/5982f9f509531143d0c79aba',
             method : 'GET',
             responseType:'json'
         })
@@ -20,7 +20,7 @@ class ScriptView extends Component{
     }
 
     markNodeAsRoot(id){
-        axios.post('http://localhost:5000/markroot', {qid:id}).then((response)=>alert("Отмечен как корневой"));
+        axios.post('/api/markroot', {qid:id}).then((response)=>alert("Отмечен как корневой"));
     }
 
     renderList() {
