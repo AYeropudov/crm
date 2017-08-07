@@ -6,7 +6,7 @@ class Scripts extends Component{
         super(props);
         axios({
             method:'get',
-            url:'/api/scripts',
+            url: process.env.REACT_APP_API_HOST + 'scripts',
             responseType:'json'
         })
             .then((response) => this.setScripts(response.data));
@@ -21,12 +21,12 @@ class Scripts extends Component{
 
     render(){
         return(
-            <div className="wraper container-fluid">
+            <some>
                 <div className="page-title">
                     <h3 className="title">Welcome Dashboard!</h3>
                 </div>
                 {this.state.scripts.map((item)=> <ScriptElement countQuestions={item.countQuestions} id={item.id} title={item.title} key={item.id}/>)}
-            </div>
+            </some>
         );
     }
 }

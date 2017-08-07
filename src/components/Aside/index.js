@@ -25,7 +25,7 @@ class Aside extends Component {
             classSide += " collapsed";
         }
         return(
-        <aside className={classSide}>
+        <aside style={{overflow:"hidden"}} className={classSide}>
             <Logo/>
             <NavbarVelonic/>
         </aside>

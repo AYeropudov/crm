@@ -11,7 +11,7 @@ class ScriptView extends Component{
             treeData: [{ title: 'Chicken', children: [ { title: 'Egg' }]}]
         };
         axios({
-            url: '/api/script/5982f9f509531143d0c79aba',
+            url: process.env.REACT_APP_API_HOST + 'script/5982f9f509531143d0c79aba',
             method : 'GET',
             responseType:'json'
         })
@@ -20,7 +20,7 @@ class ScriptView extends Component{
     }
 
     markNodeAsRoot(id){
-        axios.post('/api/markroot', {qid:id}).then((response)=>alert("Отмечен как корневой"));
+        axios.post(process.env.REACT_APP_API_HOST + 'markroot', {qid:id}).then((response)=>alert("Отмечен как корневой"));
     }
 
     renderList() {
@@ -51,7 +51,7 @@ class ScriptView extends Component{
     render(){
         let list = this.renderList();
         return(
-            <div className="wraper container-fluid">
+            <some>
                 <div className="page-title">
                     <h3 className="title">{this.state.title}</h3>
                 </div>
@@ -60,7 +60,7 @@ class ScriptView extends Component{
                         {list}
                     </div>
                 </div>
-            </div>
+            </some>
         );
     }
 }

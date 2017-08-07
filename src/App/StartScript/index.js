@@ -15,7 +15,7 @@ class StartScript extends Component{
                     }
                 ]
         }
-        let urlToScript = "/api/startscript/" + this.props.id;
+        let urlToScript = process.env.REACT_APP_API_HOST + "startscript/" + this.props.id;
         axios({
             url: urlToScript,
             method : 'GET',
@@ -27,7 +27,7 @@ class StartScript extends Component{
     }
     getNextQuestion(id){
         // console.log(id);
-        let urlToScript = "/api/question/" + id;
+        let urlToScript = process.env.REACT_APP_API_HOST + "question/" + id;
         axios({
             url: urlToScript,
             method : 'GET',
@@ -64,14 +64,14 @@ class StartScript extends Component{
     }
     render(){
         return(
-            <div className="wraper container-fluid">
+            <some>
                 <div className="page-title">
                     <h3 className="title">Опрос {this.state.title}</h3>
                 </div>
                 {/*{Object.keys(this.state.question).map((k,index) => <Question key={} text={this.state.question['text']} answers={this.state.question['answers']}/>)}*/}
                 {this.state.content.map((item)=> this.renderQuestion(item))}
                 {/*<Question content={this.state.content}/>*/}
-            </div>
+            </some>
         );
     }
 }

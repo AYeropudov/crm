@@ -6,11 +6,11 @@ class PageContent extends Component{
     }
     render(){
         return(
-            <div className="wraper container-fluid">
+            <some>
                 <div className="page-title">
                     <h3 className="title">Welcome !</h3>
                 </div>
-            </div>
+            </some>
         )
     }
 }

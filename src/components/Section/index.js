@@ -25,14 +25,14 @@ class Section extends Component{
             <section className="content">
                 <Header handleCollapseSide={this.props.handleCollapseSide}/>
                 <HashRouter basename="/" hashType="noslash">
-                    <rt>
+                    <div className="wraper container-fluid">
                         <Route exact={ true }  path="/" component={PageContent}/>
                         <Route exact={ true } path="/dashboard" component={DashBoard}/>
                         <Route exact={ true } path="/question" component={GraphComponent}/>
                         <Route exact={ true } path="/scripts" component={Scripts}/>
                         <Route path="/script/:id" component={myScriptView}/>
                         <Route path="/start/:id" component={myScriptStart}/>
-                    </rt>
+                    </div>
                 </HashRouter>
                 <Footer/>
             </section>

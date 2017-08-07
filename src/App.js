@@ -20,13 +20,15 @@ class App extends Component {
         this.setState({aside:asideState});
     }
   render() {
+        console.log(process.env.REACT_APP_API_HOST);
     return (
-      <div>
+      <some>
           <Aside collapsed={this.state.aside}/>
           <Section content={<div><h1>toto</h1></div>} handleCollapseSide={this.collapseAside}/>
-      </div>
+      </some>
     );
   }
 }
 
 export default App;
+

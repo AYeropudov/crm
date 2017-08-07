@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class DashBoard extends Component{
     render(){
         return(
-            <div className="wraper container-fluid">
+            <some>
                 <div className="page-title">
                     <h3 className="title">Welcome Dashboard!</h3>
                 </div>
@@ -37,7 +37,7 @@ class DashBoard extends Component{
                         </div>
                     </div>
                 </div>
-            </div>
+            </some>
         )
     }
 }
