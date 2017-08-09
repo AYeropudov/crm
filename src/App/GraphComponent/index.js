@@ -28,11 +28,11 @@ class GraphComponent extends Component{
                                 Website Stats
                             </h3>
                             <div className="portlet-widgets">
-                                <a href="javascript:;" data-toggle="reload"><i className="ion-refresh"></i></a>
+                                <a href="" data-toggle="reload"><i className="ion-refresh"></i></a>
                                 <span className="divider"></span>
                                 <a data-toggle="collapse" data-parent="#accordion1" href="#portlet1"><i className="ion-minus-round"></i></a>
                                 <span className="divider"></span>
-                                <a href="#" data-toggle="remove"><i className="ion-close-round"></i></a>
+                                <a href="" data-toggle="remove"><i className="ion-close-round"></i></a>
                             </div>
                             <div className="clearfix"></div>
                         </div>

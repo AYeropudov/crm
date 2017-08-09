@@ -16,9 +16,7 @@ class Logo extends Component{
 
 
 class Aside extends Component {
-    constructor(props){
-        super(props);
-    }
+
     render(){
         let classSide = "left-panel";
         if(!this.props.collapsed){

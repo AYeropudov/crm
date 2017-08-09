@@ -1,12 +1,11 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import SearchForm from "./SearchForm";
 import LeftBar from "./LeftBar";
 import RigthBar from "./RightBar";
 
 class Header extends Component{
-    constructor(props){
-        super(props);
-    }
+
     render(){
         return(
             <header className="top-head container-fluid">
@@ -25,6 +24,6 @@ class Header extends Component{
     }
 }
 Header.propTypes ={
-    handleCollapseSide: React.PropTypes.func
+    handleCollapseSide: PropTypes.func.isRequired
 }
 export default Header;

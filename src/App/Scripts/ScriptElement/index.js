@@ -1,10 +1,29 @@
 import React, {Component} from 'react';
+import Modal from 'react-bootstrap/lib/Modal';
+import Button from 'react-bootstrap/lib/Button';
+import ClientsDb from "./../../ClientsDb";
+
 
 class ScriptElement extends Component{
     constructor(props){
         super(props);
-
+        this.state = {
+            showSelectModalClient: false
+        }
+        this.selectClientModalClick = this.selectClientModalClick.bind(this);
+        this.closeSelectModalClient = this.closeSelectModalClient.bind(this);
     }
+
+    selectClientModalClick(event){
+        event.preventDefault();
+        event.stopPropagation();
+        this.setState({showSelectModalClient: true});
+    }
+
+    closeSelectModalClient(){
+        this.setState({showSelectModalClient:false});
+    }
+
     render(){
         return(
             <div className="row">
@@ -23,10 +42,22 @@ class ScriptElement extends Component{
                                     </div>
                                 </div>
                             </div>
-                            <a href={ "#start/" + this.props.id}>НАЧАТЬ ОПРОС</a>
+                            <a href="" onClick={this.selectClientModalClick}>НАЧАТЬ ОПРОС</a>
+                            {/*<a href={ "#start/" + this.props.id}>НАЧАТЬ ОПРОС</a>*/}
                         </div>
                     </div>
                 </div>
+                <Modal bsSize="large" show={this.state.showSelectModalClient} onHide={this.closeSelectModalClient}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Modal heading</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <ClientsDb/>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.closeSelectModalClient}>Close</Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         )
     }

@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class Notification extends Component{
     constructor(props){
@@ -17,7 +18,7 @@ class Notification extends Component{
         iconClass += this.props.Icon;
         return(
             <li>
-                <a href="#">
+                <a href="">
                     <span className="pull-left">
                         <i className={iconClass}></i>
                     </span>
@@ -28,8 +29,8 @@ class Notification extends Component{
     }
 }
 Notification.PropTypes = {
-    Icon: React.PropTypes.string,
-    Body: React.PropTypes.string
+    Icon: PropTypes.string.isRequired,
+    Body: PropTypes.string.isRequired
 }
 class Notifications extends Component{
     constructor(props){
@@ -56,7 +57,7 @@ class Notifications extends Component{
         }
         return(
                 <li className={classLi} onClick={this.handleOpenMessageBox} onBlur={this.handleFocus}>
-                    <a data-toggle="dropdown" className="dropdown-toggle" href="#">
+                    <a data-toggle="dropdown" className="dropdown-toggle" href="">
                         <i className="fa fa-bell-o"></i>
                         <span className="badge badge-sm up bg-pink count">{this.state.notifications.length}</span>
                     </a>

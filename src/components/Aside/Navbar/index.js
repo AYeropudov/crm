@@ -70,8 +70,10 @@ class NavbarVelonic extends Component {
               if(subs[key].type === 'nested'){
                   Object.keys(subs[key].sub).map(function (j, i) {
                       subs[key].sub[j].active=false;
+                      return true;
                   })
               }
+              return true;
         });
         if(!parentKey) {
             subs[key].active = true;

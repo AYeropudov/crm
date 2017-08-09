@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class Message extends Component{
     constructor(props){
@@ -7,7 +8,6 @@ class Message extends Component{
 
     }
 
-
     renderTime(){
         return '10 minutes';
     }
@@ -15,7 +15,7 @@ class Message extends Component{
     render(){
         return(
             <li>
-                <a href="#">
+                <a href="">
                     <span className="pull-left"><img src={this.props.Avatar} className="img-circle thumb-sm m-r-15" alt="img" /></span>
                     <span className="block"><strong>{this.props.Title}</strong></span>
                     <span className="media-body block">{this.props.Body}<br/><small className="text-muted">{this.renderTime} ago</small></span>
@@ -25,9 +25,9 @@ class Message extends Component{
     }
 }
 Message.PropTypes = {
-    Avatar: React.PropTypes.string,
-    Title: React.PropTypes.string,
-    Body: React.PropTypes.string
+    Avatar: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    Body: PropTypes.string.isRequired
 }
 class Messages extends Component{
     constructor(props){
@@ -54,7 +54,7 @@ class Messages extends Component{
         }
         return(
                 <li className={classLi} onClick={this.handleOpenMessageBox} onBlur={this.handleFocus}>
-                    <a data-toggle="dropdown" className="dropdown-toggle" href="#">
+                    <a data-toggle="dropdown" className="dropdown-toggle" href="">
                         <i className="fa fa-envelope-o"></i>
                         <span className="badge badge-sm up bg-purple count">{this.state.messages.length}</span>
                     </a>

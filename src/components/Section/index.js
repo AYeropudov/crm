@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types'
 import Header from "../Header";
 import Footer from "../Footer";
 import PageContent from "./PageContent";
@@ -7,19 +8,17 @@ import DashBoard from "../../App/Dashboard";
 import GraphComponent from "../../App/GraphComponent";
 import Scripts from "../../App/Scripts";
 import ScriptView from "../../App/ScriptView";
-import StartScript from "../../App/StartScript/index";
+import Attempt from "../../App/Attempt";
 
 
 class Section extends Component{
-    constructor(props){
-        super(props);
-    }
+
     render(){
         const myScriptView = (props) => {
             return <ScriptView id={props.match.params.id}/>
         }
         const myScriptStart = (props) => {
-            return <StartScript id={props.match.params.id}/>
+            return <Attempt id={props.match.params.id}/>
         }
         return(
             <section className="content">
@@ -40,6 +39,6 @@ class Section extends Component{
     }
 }
 Section.propTypes={
-    handleCollapseSide: React.PropTypes.func
+    handleCollapseSide: PropTypes.func.isRequired
 }
 export default Section;

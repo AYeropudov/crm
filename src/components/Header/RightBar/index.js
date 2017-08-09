@@ -1,12 +1,9 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import Messages from "./Messages";
 import Notifications from "./Notifications";
 import UserBar from "./UserBar";
 
 class RigthBar extends Component{
-    constructor(props){
-        super(props);
-    }
 
     render(){
         return(

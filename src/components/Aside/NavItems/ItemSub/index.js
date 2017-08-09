@@ -1,5 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import NavItem from '../Item';
+
 class NavItemSub extends Component{
 
     constructor(props) {
@@ -27,7 +29,7 @@ class NavItemSub extends Component{
     }
 }
 NavItemSub.propTypes= {
-    onClickHandle: PropTypes.func
+    onClickHandle: PropTypes.func.isRequired
 };
 export default NavItemSub;
 

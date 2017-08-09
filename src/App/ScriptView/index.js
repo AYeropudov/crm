@@ -24,7 +24,6 @@ class ScriptView extends Component{
     }
 
     renderList() {
-        const getNodeKey = ({ treeIndex }) => treeIndex;
         return (
             <SortableTree
 

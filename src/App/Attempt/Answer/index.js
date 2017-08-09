@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 
 class Answer extends Component{
-    constructor(props){
-        super(props);
-    }
+
     render(){
         let def_class = 'btn btn-block btn-lg ';
         def_class += this.props.type_class;
