@@ -30,7 +30,7 @@ class Section extends Component{
                         <Route exact={ true } path="/question" component={GraphComponent}/>
                         <Route exact={ true } path="/scripts" component={Scripts}/>
                         <Route path="/script/:id" component={myScriptView}/>
-                        <Route path="/start/:id" component={myScriptStart}/>
+                        <Route path="/startattempt/:id" component={myScriptStart}/>
                     </div>
                 </HashRouter>
                 <Footer/>

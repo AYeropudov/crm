@@ -52,7 +52,7 @@ class ScriptElement extends Component{
                         <Modal.Title>Modal heading</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <ClientsDb/>
+                        <ClientsDb scriptId={this.props.id}/>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.closeSelectModalClient}>Close</Button>

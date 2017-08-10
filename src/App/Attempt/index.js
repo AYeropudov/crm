@@ -7,6 +7,7 @@ class Attempt extends Component{
         super(props);
         this.state = {
                 title: "",
+                client:"",
                 content:[
                     {
                         key:"some_key",
@@ -25,9 +26,8 @@ class Attempt extends Component{
 
         this.getNextQuestion = this.getNextQuestion.bind(this);
     }
-    getNextQuestion(id){
-        // console.log(id);
-        let urlToScript = process.env.REACT_APP_API_HOST + "question/" + id + "/"+ this.getCookie('attempt');
+    getNextQuestion(id, answer){
+        let urlToScript = process.env.REACT_APP_API_HOST + "question/" + this.props.id + "/"+ answer + "/"+ id;
         axios({
             url: urlToScript,
             method : 'GET',
@@ -47,20 +47,10 @@ class Attempt extends Component{
         });
     }
 
-    getCookie(name) {
-        let matches = document.cookie.match(new RegExp(
-            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-        ));
-        return matches ? decodeURIComponent(matches[1]) : undefined;
-    }
     setFirstQuestion(data){
-
-        let d = new Date();
-        d.setDate(d.getDate() + 10);
-        document.cookie = "attempt="+data.attempt+"; path=/; expires=" + d.toUTCString();
-        // Cookies.set("attempt", data.attempt, {path:"/", expires: d});
         this.setState({
             title:data.title,
+            client: data.client,
             content:[
                 {
                     key: data.key,
@@ -77,7 +67,7 @@ class Attempt extends Component{
         return(
             <some>
                 <div className="page-title">
-                    <h3 className="title">Опрос {this.state.title}</h3>
+                    <h3 className="title">Опрос {this.state.title} для <i>{this.state.client}</i></h3>
                 </div>
                 {/*{Object.keys(this.state.question).map((k,index) => <Question key={} text={this.state.question['text']} answers={this.state.question['answers']}/>)}*/}
                 {this.state.content.map((item)=> this.renderQuestion(item))}
