@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
 import Button from 'react-bootstrap/lib/Button';
-import {HashRouter, Route} from 'react-router-dom'
 import Client from "./Client";
 import AddForm from "./AddForm";
 import axios from "axios";
@@ -59,8 +58,9 @@ class ClientsDb extends Component{
             url: process.env.REACT_APP_API_HOST + 'createattempt',
             responseType:'json',
             data: {client_id: event.target.id, script_id: this.props.scriptId}
-        }).
-            then((response) => this.startAttempt(response));
+        }).then(
+            (response) => this.startAttempt(response)
+        );
     }
 
     startAttempt(response){

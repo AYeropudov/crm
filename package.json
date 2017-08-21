@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "immutability-helper": "^2.3.1",
     "install": "^0.10.1",
     "npm": "^5.3.0",
     "prop-types": "^15.5.10",
@@ -11,6 +12,7 @@
     "react-addons-shallow-compare": "^15.6.0",
     "react-addons-update": "^15.6.0",
     "react-bootstrap": "^0.31.1",
+    "react-data-grid": "^2.0.58",
     "react-dom": "^15.6.1",
     "react-graph-vis": "^0.1.2",
     "react-nestable": "^1.0.15",

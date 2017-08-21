@@ -9,6 +9,7 @@ import GraphComponent from "../../App/GraphComponent";
 import Scripts from "../../App/Scripts";
 import ScriptView from "../../App/ScriptView";
 import Attempt from "../../App/Attempt";
+import Dictionary from "../../App/Dictionary";
 
 
 class Section extends Component{
@@ -31,6 +32,7 @@ class Section extends Component{
                         <Route exact={ true } path="/scripts" component={Scripts}/>
                         <Route path="/script/:id" component={myScriptView}/>
                         <Route path="/startattempt/:id" component={myScriptStart}/>
+                        <Route exact={true} path="/dictionaries" component={Dictionary}/>
                     </div>
                 </HashRouter>
                 <Footer/>

@@ -1,5 +1,3 @@
-import React from 'react';
-
 class FormValidator {
 
     validate(value, validator){

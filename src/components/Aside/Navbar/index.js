@@ -56,8 +56,28 @@ class NavbarVelonic extends Component {
                             parentKey:"m2"
                         }
                     }
-
-                }
+                },
+                "m3": {
+                    href:'#',
+                    key:'m3',
+                    icon: "ion-settings",
+                    label: "Свойства",
+                    type: "nested",
+                    active: false,
+                    clickHandle: this.handleItemClick,
+                    parentKey: false,
+                    sub:{
+                        'smenu4': {
+                            href:'#dictionaries',
+                            key:'smenu4',
+                            icon: "",
+                            label: "Справочники",
+                            type: "simple",
+                            active: false,
+                            parentKey:"m3"
+                        },
+                    }
+                },
             }
 
         }
