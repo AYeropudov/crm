@@ -3,6 +3,26 @@ import Tooltip from 'react-bootstrap/lib/Tooltip';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import ReactDataGrid from "react-data-grid";
 import update from 'immutability-helper';
+import axios from "axios";
+
+class Toolbar extends Component {
+    render(){
+        return(
+            <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip">Добавить новую запись</Tooltip>}>
+                <button onClick={this.props.onAddRow} alt="Добавить новую запись" className="btn btn-icon btn-success m-b-5 tooltip-btn" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tooltip on right">
+                    <i className="fa fa-plus" alt="Добавить новую запись"></i>
+                </button>
+            </OverlayTrigger>
+        );
+    }
+}
+class EmptyRowsView  extends Component{
+    render() {
+        return (<div>Справочник пуст</div>);
+    }
+}
+
+
 class DictElement extends Component{
 
     constructor(props){
@@ -10,10 +30,7 @@ class DictElement extends Component{
         this.state = {
             expand: true,
             rows:[
-                {id:1, value:"TEST1"},
-                {id:2, value:"TEST2"},
-                {id:3, value:"TEST3"},
-                {id:4, value:"TEST4"},
+
             ],
             columns : [
                     { key: 'id', name: 'Код', locked:true, width:50},
@@ -27,6 +44,23 @@ class DictElement extends Component{
         this.onRowsDeselected = this.onRowsDeselected.bind(this);
         this.onRowsSelected = this.onRowsSelected.bind(this);
         this.handleGridRowsUpdated = this.handleGridRowsUpdated.bind(this);
+        this.fetchDictionary = this.fetchDictionary.bind(this);
+        this.addNewRow = this.addNewRow.bind(this);
+    }
+
+    fetchDictionary(){
+
+    }
+
+    addNewRow(){
+        let new_row = {id:"", value:""};
+        let rows = this.state.rows.slice();
+        let new_state = update(rows, {$push: [new_row]});
+        this.setState({rows:new_state});
+    }
+
+    setRows(data){
+        this.setState({rows:data});
     }
 
     expandPanel(event){
@@ -51,17 +85,47 @@ class DictElement extends Component{
 
     handleGridRowsUpdated({ fromRow, toRow, updated }) {
         let rows = this.state.rows.slice();
+        // for (let i = fromRow; i <= toRow; i++) {
+        //     let rowToUpdate = rows[i];
+        //     let updatedRow = update(rowToUpdate, {$merge: updated});
+        //     rows[i] = updatedRow;
+        // }
+        //
+        // this.setState({ rows });
 
-        for (let i = fromRow; i <= toRow; i++) {
-            let rowToUpdate = rows[i];
-            let updatedRow = update(rowToUpdate, {$merge: updated});
-            rows[i] = updatedRow;
-        }
 
-        this.setState({ rows });
+        // if((toRow - fromRow) === 0){
+        //     let rowToUpdate = rows[fromRow];
+        //     if(rowToUpdate.id === ''){
+        //         this.insertNew(updated);
+        //     } else {
+        //         let row_to_update= rows[fromRow];
+        //         row_to_update.value=updated.value;
+        //         this.updateMany(row_to_update);
+        //     }
+        // } else {
+        //     let rows_to_update = [];
+        //     for (let z = fromRow; z <= toRow; z++) {
+        //         let rowToUpdate = rows[z];
+        //         let updatedRow = update(rowToUpdate, {$merge: updated});
+        //         rows_to_update.push(updatedRow);
+        //     }
+        //     this.updateMany(rows_to_update);
+        // }
+
+    }
+
+    insertNew(row){
+        console.log("INSERT", row);
+        return false;
+    }
+
+    updateMany(rows){
+        console.log('UDPATE', rows);
     }
 
     render(){
+
         let expandClass = (this.state.expand)? 'in':"";
         return(
             <div className="col-lg-12">
@@ -81,11 +145,7 @@ class DictElement extends Component{
                         <div className="portlet-body">
                             <div className="row">
                                 <div className="col-md-1">
-                                    <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip">Добавить новую запись</Tooltip>}>
-                                        <button alt="Добавить новую запись" className="btn btn-icon btn-success m-b-5 tooltip-btn" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tooltip on right">
-                                            <i className="fa fa-plus" alt="Добавить новую запись"></i>
-                                        </button>
-                                    </OverlayTrigger>
+
                                 </div>
                                 <div className="col-md-6">
                                     <ReactDataGrid
@@ -95,7 +155,9 @@ class DictElement extends Component{
                                         maxHeight={300}
                                         className="table table-striped table-bordered dataTable no-footer"
                                         enableCellSelect={true}
+                                        emptyRowsView={EmptyRowsView}
                                         onGridRowsUpdated={this.handleGridRowsUpdated}
+                                        toolbar={<Toolbar onAddRow={this.addNewRow}/>}
                                         rowSelection={{
                                             showCheckbox: true,
                                             enableShiftSelect: true,
