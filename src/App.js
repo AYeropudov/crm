@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Aside from './components/Aside';
 import Section from './components/Section';
+import 'primereact/resources/primereact.min.css';
+import 'primereact/resources/themes/omega/theme.css';
 
 class App extends Component {
 
