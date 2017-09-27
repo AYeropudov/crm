@@ -1,35 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NavItem from '../Item';
+import {selectMenu} from "../../../../actions/appActions";
+import {connect} from "react-redux";
 
 class NavItemSub extends Component{
-
-    constructor(props) {
-        super(props);
-        this.state = props.data
-    }
 
     render(){
         let classesMain = "has-submenu";
 
-        if (this.state.active){
+        if (this.props.active){
             classesMain +=' active';
         }
         return(
             <li className={ classesMain }>
-                <a onClick={()=>this.props.onClickHandle(this.state.key, this.state.parentKey)}>
-                    <i className={this.state.icon}></i>
-                    <span className="nav-label">{this.state.label}</span>
+                <a onClick={()=>(this.props.dispatch(selectMenu({parent:this.props.parentKey, target:this.props.identity})))}>
+                    <i className={this.props.icon}></i>
+                    <span className="nav-label">{this.props.label}</span>
                 </a>
                 <ul className="list-unstyled">
-                    {Object.keys(this.state.sub).map((k,index)=><NavItem onClickHandle={this.props.onClickHandle} key={this.state.sub[k]['key']} data={this.state.sub[k]}/>)}
+                    {this.props.sub.map(itm => <NavItem identity={itm.get('key')} {...itm.toObject()}/>)}
                 </ul>
             </li>
         )
     }
 }
-NavItemSub.propTypes= {
-    onClickHandle: PropTypes.func.isRequired
-};
-export default NavItemSub;
+function mapStoreToProps(store) {
+    return {};
+}
+export default connect(mapStoreToProps)(NavItemSub);
 

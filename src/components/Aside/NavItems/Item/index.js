@@ -1,31 +1,27 @@
-import React, { Component} from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent} from 'react';
+import {selectMenu} from "../../../../actions/appActions";
+import {connect} from "react-redux";
 
-class NavItem extends Component{
+class NavItem extends PureComponent {
 
     constructor(props) {
         super(props);
-        this.state = props.data;
     }
 
-    render(){
-        let classesMain = "";
-
-        if (this.state.active){
-            classesMain +=' active';
-        }
-
+    render() {
         return(
-            <li className={ classesMain } >
-                <a href={this.state.href} onClick={()=>this.props.onClickHandle(this.state.key, this.state.parentKey)}>
-                    <i className={this.state.icon}></i>
-                    <span className="nav-label">{this.state.label}</span>
+            <li className={ this.props.active && "active" } >
+
+                <a href={this.props.href} onClick={()=>{this.props.dispatch(selectMenu({parent:this.props.parentKey, target:this.props.identity}))}}>
+                    {this.props.icon && <i className={this.props.icon}></i>}
+                    {this.props.icon && <span className="nav-label">{this.props.label}</span>}
+                    {!this.props.icon && this.props.label}
                 </a>
             </li>
         )
     }
 }
-NavItem.propTypes= {
-    onClickHandle: PropTypes.func.isRequired
-};
-export default NavItem;
+function mapStoreToProps(store) {
+    return {};
+}
+export default connect(mapStoreToProps)(NavItem);

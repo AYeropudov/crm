@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import axios from "axios";
 import Question from "./Question/index";
 
-class Attempt extends Component{
+class Attempt extends PureComponent{
     constructor(props){
         super(props);
         this.state = {

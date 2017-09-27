@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import axios from 'axios';
 import SortableTree, {getFlatDataFromTree} from 'react-sortable-tree';
-class ScriptView extends Component{
+
+
+class ScriptView extends PureComponent{
     constructor(props){
         super(props);
 

@@ -1,35 +1,40 @@
-import React, { Component } from 'react';
+import React, {PureComponent} from 'react';
 import './App.css';
 import Aside from './components/Aside';
 import Section from './components/Section';
-import 'primereact/resources/primereact.min.css';
-import 'primereact/resources/themes/omega/theme.css';
+import {connect} from 'react-redux';
+import {selectMenu} from "./actions/appActions";
 
-class App extends Component {
 
-    constructor(props){
+class App extends PureComponent {
+
+    constructor(props) {
         super(props);
-        this.state = {
-            aside:true
-        };
-        this.collapseAside = this.collapseAside.bind(this);
     }
-
-    collapseAside()
-    {
-        let asideState = !(this.state.aside);
-        this.setState({aside:asideState});
+    componentDidMount(){
+        let test = window.location.hash;
+        let aside = this.props.app.get('aside');
+        let t = aside.find(o => o.get('href') === test);
+        if(t === undefined){
+            aside.forEach(itm => {if(t===undefined){t = itm.get('sub').find(r => r.get('href') === test)}})
+        }
+        if(t!== undefined){
+            this.props.dispatch(selectMenu({parent:t.get('parentKey'), target:t.get('key')}))
+        }
     }
-  render() {
-        console.log(process.env.REACT_APP_API_HOST);
-    return (
-      <some>
-          <Aside collapsed={this.state.aside}/>
-          <Section content={<div><h1>toto</h1></div>} handleCollapseSide={this.collapseAside}/>
-      </some>
-    );
-  }
+    render() {
+        return (
+            <some>
+                <Aside/>
+                <Section content={<div><h1>toto</h1></div>}/>
+            </some>
+        );
+    }
 }
 
-export default App;
+function mapStoreToProps(store) {
+    return {...store};
+}
+
+export default connect(mapStoreToProps)(App);
 

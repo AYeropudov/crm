@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import NavbarVelonic from './Navbar';
-class Logo extends Component{
+import {connect} from "react-redux";
+class Logo extends PureComponent{
 
     render(){
         return(
@@ -15,11 +16,11 @@ class Logo extends Component{
 }
 
 
-class Aside extends Component {
+class Aside extends PureComponent {
 
     render(){
         let classSide = "left-panel";
-        if(!this.props.collapsed){
+        if(!this.props.asideCollapsed){
             classSide += " collapsed";
         }
         return(
@@ -30,5 +31,7 @@ class Aside extends Component {
         )
     }
 }
-
-export default Aside;
+function mapStoreToProps(store) {
+    return store.app.toObject();
+}
+export default connect(mapStoreToProps)(Aside);

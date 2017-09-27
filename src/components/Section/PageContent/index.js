@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 
-class PageContent extends Component{
+class PageContent extends PureComponent{
 
     render(){
         return(

@@ -1,37 +1,29 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types'
 import Header from "../Header";
 import Footer from "../Footer";
 import PageContent from "./PageContent";
 import {HashRouter, Route} from 'react-router-dom'
 import DashBoard from "../../App/Dashboard";
-import GraphComponent from "../../App/GraphComponent";
 import Scripts from "../../App/Scripts";
 import ScriptView from "../../App/ScriptView";
 import Attempt from "../../App/Attempt";
 import Dictionary from "../../App/Dictionary";
 
 
-class Section extends Component{
+class Section extends PureComponent{
 
     render(){
-        const myScriptView = (props) => {
-            return <ScriptView id={props.match.params.id}/>
-        }
-        const myScriptStart = (props) => {
-            return <Attempt id={props.match.params.id}/>
-        }
         return(
             <section className="content">
-                <Header handleCollapseSide={this.props.handleCollapseSide}/>
+                <Header/>
                 <HashRouter basename="/" hashType="noslash">
                     <div className="wraper container-fluid">
                         <Route exact={ true }  path="/" component={PageContent}/>
                         <Route exact={ true } path="/dashboard" component={DashBoard}/>
-                        <Route exact={ true } path="/question" component={GraphComponent}/>
                         <Route exact={ true } path="/scripts" component={Scripts}/>
-                        <Route path="/script/:id" component={myScriptView}/>
-                        <Route path="/startattempt/:id" component={myScriptStart}/>
+                        <Route path="/script/:id" component={(props) => <ScriptView id={props.match.params.id}/>}/>
+                        <Route path="/startattempt/:id" component={(props) => <Attempt id={props.match.params.id}/>}/>
                         <Route exact={true} path="/dictionaries" component={Dictionary}/>
                     </div>
                 </HashRouter>
@@ -41,6 +33,5 @@ class Section extends Component{
     }
 }
 Section.propTypes={
-    handleCollapseSide: PropTypes.func.isRequired
-}
+};
 export default Section;

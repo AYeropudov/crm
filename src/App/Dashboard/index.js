@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 
-class DashBoard extends Component{
+class DashBoard extends PureComponent{
     render(){
         return(
             <some>

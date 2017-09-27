@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import ScriptElement from "./ScriptElement";
 import axios from 'axios'
-class Scripts extends Component{
+class Scripts extends PureComponent{
     constructor(props){
         super(props);
         axios({
