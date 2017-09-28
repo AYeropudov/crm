@@ -65,7 +65,7 @@ const aside = Map({
 });
 
 export function app(state=Map({
-    asideCollapsed:false,
+    asideCollapsed:true,
     aside:aside
 }), action) {
     switch (action.type){
