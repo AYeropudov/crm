@@ -1,6 +1,8 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import SortableTree,{ changeNodeAtPath } from "react-sortable-tree";
-class Dictionary extends Component{
+import {getReferences} from "../../actions/apiActions";
+import {connect} from "react-redux";
+class Dictionary extends PureComponent{
 
     constructor(props){
         super(props);
@@ -30,6 +32,10 @@ class Dictionary extends Component{
         this.onAddClick = this.onAddClick.bind(this);
         this.onEditClick = this.onEditClick.bind(this);
         this.onRemoveClick = this.onRemoveClick.bind(this);
+    }
+
+    componentDidMount(){
+        this.props.dispatch(getReferences());
     }
 
     onAddClick(type){
@@ -118,4 +124,8 @@ class Dictionary extends Component{
 
     }
 }
-export default Dictionary;
+function mapStoreToProps(store) {
+    return store;
+
+}
+export default connect(mapStoreToProps)(Dictionary);

@@ -7,9 +7,10 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import reducer from './reducers';
+import api from "./middlewares/api";
 
+const middlewares = [thunk, api];
 
-const middlewares = [thunk];
 let createStoreWithMiddlewares = applyMiddleware(...middlewares)(createStore);
 const store = createStoreWithMiddlewares(
     reducer,
