@@ -42,6 +42,6 @@ export default (store, dispatch) => next => action => {
 
     return callApiRequest(RAW_DATA.request).then(
         response => next({type:RAW_DATA.type, response}),
-        error => next({type:"API_ERROR", ...error.response})
+        error => next({type:"API_ERROR_"+error.response.status, ...error.response})
     )
 }

@@ -4,7 +4,7 @@ import Aside from './components/Aside';
 import Section from './components/Section';
 import {connect} from 'react-redux';
 import {selectMenu} from "./actions/appActions";
-
+import ErrorAlert from './components/Alerts/errors';
 
 class App extends PureComponent {
 
@@ -27,6 +27,7 @@ class App extends PureComponent {
             <some>
                 <Aside/>
                 <Section content={<div><h1>toto</h1></div>}/>
+                <ErrorAlert/>
             </some>
         );
     }
