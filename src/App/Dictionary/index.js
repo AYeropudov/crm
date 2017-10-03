@@ -22,8 +22,6 @@ class Dictionary extends PureComponent{
         this.props.dispatch(getReferences());
     }
     componentWillReceiveProps(nextProps){
-        console.log(nextProps);
-        nextProps.types[0].children.forEach(itm => console.log(slugify(itm.title)));
         this.setState((prevState) => {
             return Object.assign({},prevState, {data: nextProps.types, references: nextProps.references});
         });
@@ -90,8 +88,8 @@ class Dictionary extends PureComponent{
                            </thead>
                            <tbody>
                            {this.state.references[this.state.selected] && this.state.references[this.state.selected].map(ref=>
-                               <tr key={ref.key}>
-                                   <td>{ref._id}</td>
+                               <tr key={ref._id}>
+                                   <td style={{width:"180px"}}>{ref._id}</td>
                                    <td>{ref.value}</td>
                                    <td style={{width:"80px"}}>
                                        <div className="pull-right">
@@ -122,6 +120,9 @@ function mapStoreToProps(store) {
     let props = store.refs;
     let types = props.get('types').map(itm => itm.toObject()).toArray();
     let refs = props.get('references').map(itm => itm.map(s => s.toObject())).map(itm => itm.toArray()).toObject();
+    let addition = []
+    types.forEach(itm => addition.push({code:"refs", type:0, key: itm.key, _id: itm.key, value: itm.title}));
+    refs['refs'] = addition;
     return {
         types:[{title: "Справочники", expanded:true, children: types, id:0, key:'refs'}],
         references: refs
