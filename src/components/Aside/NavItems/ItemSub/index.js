@@ -19,7 +19,7 @@ class NavItemSub extends Component{
                     <span className="nav-label">{this.props.label}</span>
                 </a>
                 <ul className="list-unstyled">
-                    {this.props.sub.map(itm => <NavItem identity={itm.get('key')} {...itm.toObject()}/>)}
+                    {this.props.sub.toArray().map(itm => <NavItem identity={itm.get('key')} {...itm.toObject()}/>)}
                 </ul>
             </li>
         )

@@ -37,6 +37,6 @@ class NavbarVelonic extends Component {
 }
 
 function mapStoreToProps(store) {
-    return {menus: store.app.get('aside')};
+    return {menus: store.app.get('aside').toArray()};
 }
 export default connect(mapStoreToProps)(NavbarVelonic);

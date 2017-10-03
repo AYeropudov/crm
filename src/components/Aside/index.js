@@ -32,6 +32,6 @@ class Aside extends PureComponent {
     }
 }
 function mapStoreToProps(store) {
-    return store.app.toObject();
+    return {asideCollapsed: store.app.get('asideCollapsed')};
 }
 export default connect(mapStoreToProps)(Aside);
