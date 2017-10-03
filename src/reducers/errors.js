@@ -1,5 +1,5 @@
 import {Map, fromJs} from "immutable";
-import {show400, hide400, show401, hide401, show404, hide404, show405, hide405, show500, hide500} from "./cleanFuncs/errors";
+import {show400, hide400, show401, hide401, show404, hide404, show405, hide405, show500, hide500, showConn, hideConn} from "./cleanFuncs/errors";
 
 const errorsInit = Map({
     api: Map({
@@ -7,7 +7,8 @@ const errorsInit = Map({
         request_400: false,
         request_404: false,
         request_500:false,
-        request_401:false
+        request_401:false,
+
     }),
     references:Map({
         edit: false,
@@ -28,6 +29,8 @@ export function errors(state=errorsInit, action){
             return show405(state);
         case "API_ERROR_500":
             return show500(state);
+        case "API_ERROR_CONN":
+            return showConn(state);
         case "HIDE_ERROR_404":
             return hide404(state);
         case "HIDE_ERROR_400":
@@ -38,6 +41,8 @@ export function errors(state=errorsInit, action){
             return hide405(state);
         case "HIDE_ERROR_500":
             return hide500(state);
+        case "HIDE_CONN":
+            return hideConn(state);
     }
     return state;
 }

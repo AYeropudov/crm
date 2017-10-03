@@ -6,27 +6,27 @@ class Dictionary extends PureComponent{
 
     constructor(props){
         super(props);
-        let preconfDict = [
-            {title: "Категории Контрагентов", children: [], id:1, key:'customer_type'},
-            {title: "Подкатегории контрагентов", children: [], id:2, key:'customer_subtype'},
-            {title: "Форматы контрагентов", children: [], id:3, key:'customer_type'},
-            {title: "Товарное направление", children: [], id:4, key:'customer_type'},
-            {title: "Конечный покупатель", children: [], id:5, key:'customer_type'},
-            {title: "Регион/Округ", children: [], id:6, key:'customer_type'},
-            {title: "Город", children: [], id:7, key:'customer_type'},
-            {title: "Вид оплаты", children: [], id:8, key:'customer_type'},
-            {title: "Форма оплаты", children: [], id:9, key:'customer_type'},
-            {title: "Осчет дней отсрочки платежа", children: [], id:10, key:'customer_type'},
-            {title: "Формы договоров", children: [], id:11, key:'customer_type'},
-            {title: "Частота заявок", children: [], id:12, key:'customer_type'},
-            {title: "Вид документооборота", children: [], id:13, key:'customer_type'},
-            {title: "Доставка", children: [], id:14, key:'customer_type'},
-            {title: "Возврат товара", children: [], id:15, key:'customer_type'},
-            {title: "Перечень документов для заключения договора", children: [], id:16, key:'customer_type'},
-        ];
+        // let preconfDict = [
+        //     {title: "Категории Контрагентов", children: [], id:1, key:'customer_type'},
+        //     {title: "Подкатегории контрагентов", children: [], id:2, key:'customer_subtype'},
+        //     {title: "Форматы контрагентов", children: [], id:3, key:'customer_type'},
+        //     {title: "Товарное направление", children: [], id:4, key:'customer_type'},
+        //     {title: "Конечный покупатель", children: [], id:5, key:'customer_type'},
+        //     {title: "Регион/Округ", children: [], id:6, key:'customer_type'},
+        //     {title: "Город", children: [], id:7, key:'customer_type'},
+        //     {title: "Вид оплаты", children: [], id:8, key:'customer_type'},
+        //     {title: "Форма оплаты", children: [], id:9, key:'customer_type'},
+        //     {title: "Осчет дней отсрочки платежа", children: [], id:10, key:'customer_type'},
+        //     {title: "Формы договоров", children: [], id:11, key:'customer_type'},
+        //     {title: "Частота заявок", children: [], id:12, key:'customer_type'},
+        //     {title: "Вид документооборота", children: [], id:13, key:'customer_type'},
+        //     {title: "Доставка", children: [], id:14, key:'customer_type'},
+        //     {title: "Возврат товара", children: [], id:15, key:'customer_type'},
+        //     {title: "Перечень документов для заключения договора", children: [], id:16, key:'customer_type'},
+        // ];
         this.state = {
-            data: [{title: "Справочники", expanded:true, children: preconfDict, id:0, key:'customer_type'}],
-            reference: [{_id:1,value:"12345", key:1},{_id:2,value:"987654", key:2}]
+            data:[],
+            references:[]
         };
 
         this.onAddClick = this.onAddClick.bind(this);
@@ -37,7 +37,10 @@ class Dictionary extends PureComponent{
     componentDidMount(){
         this.props.dispatch(getReferences());
     }
-
+    componentWillReceiveProps(nextProps){
+        console.log(nextProps);
+        this.setState(prevState => Object.assign({},prevState, {data: nextProps.types, references: nextProps.references}));
+    }
     onAddClick(type){
         console.log(type);
     }
@@ -54,7 +57,7 @@ class Dictionary extends PureComponent{
         const getNodeKey = ({ node: { id } }) => id;
         return(
             <div className="row" style={{display:"table", width:'100%'}}>
-                <div className="col-md-4" style={{height:this.state.data[0].children.length*42+"px"}}>
+                <div className="col-md-4" style={{height:16*42+"px"}}>
                 <SortableTree
                     canDrag={false}
                     treeData={this.state.data}
@@ -125,7 +128,14 @@ class Dictionary extends PureComponent{
     }
 }
 function mapStoreToProps(store) {
-    return store;
+
+    let props = store.refs;
+    let types = props.get('types').map(itm => itm.toObject()).toArray();
+    let refs = props.get('references').map(itm => itm.map(s => s.toObject())).map(itm => itm.toArray()).toObject();
+    return {
+        types:[{title: "Справочники", expanded:true, children: types, id:0, key:'refs'}],
+        references: refs
+    };
 
 }
 export default connect(mapStoreToProps)(Dictionary);

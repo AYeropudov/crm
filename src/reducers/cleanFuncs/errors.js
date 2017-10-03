@@ -1,5 +1,13 @@
 import {List, Map} from "immutable";
 
+export function showConn(state) {
+    return state.updateIn(['api', 'connection'], e => true);
+}
+
+export function hideConn(state) {
+    return state.updateIn(['api', 'connection'], e => false);
+}
+
 export function show404(state) {
     return state.updateIn(['api', 'request_404'], e => true);
 }
