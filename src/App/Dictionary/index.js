@@ -2,31 +2,15 @@ import React, {PureComponent} from 'react'
 import SortableTree,{ changeNodeAtPath } from "react-sortable-tree";
 import {getReferences} from "../../actions/apiActions";
 import {connect} from "react-redux";
+import { transliterate as tr, slugify } from 'transliteration';
 class Dictionary extends PureComponent{
 
     constructor(props){
         super(props);
-        // let preconfDict = [
-        //     {title: "Категории Контрагентов", children: [], id:1, key:'customer_type'},
-        //     {title: "Подкатегории контрагентов", children: [], id:2, key:'customer_subtype'},
-        //     {title: "Форматы контрагентов", children: [], id:3, key:'customer_type'},
-        //     {title: "Товарное направление", children: [], id:4, key:'customer_type'},
-        //     {title: "Конечный покупатель", children: [], id:5, key:'customer_type'},
-        //     {title: "Регион/Округ", children: [], id:6, key:'customer_type'},
-        //     {title: "Город", children: [], id:7, key:'customer_type'},
-        //     {title: "Вид оплаты", children: [], id:8, key:'customer_type'},
-        //     {title: "Форма оплаты", children: [], id:9, key:'customer_type'},
-        //     {title: "Осчет дней отсрочки платежа", children: [], id:10, key:'customer_type'},
-        //     {title: "Формы договоров", children: [], id:11, key:'customer_type'},
-        //     {title: "Частота заявок", children: [], id:12, key:'customer_type'},
-        //     {title: "Вид документооборота", children: [], id:13, key:'customer_type'},
-        //     {title: "Доставка", children: [], id:14, key:'customer_type'},
-        //     {title: "Возврат товара", children: [], id:15, key:'customer_type'},
-        //     {title: "Перечень документов для заключения договора", children: [], id:16, key:'customer_type'},
-        // ];
         this.state = {
             data:[],
-            references:[]
+            references:[],
+            selected:false
         };
 
         this.onAddClick = this.onAddClick.bind(this);
@@ -39,7 +23,10 @@ class Dictionary extends PureComponent{
     }
     componentWillReceiveProps(nextProps){
         console.log(nextProps);
-        this.setState(prevState => Object.assign({},prevState, {data: nextProps.types, references: nextProps.references}));
+        nextProps.types[0].children.forEach(itm => console.log(slugify(itm.title)));
+        this.setState((prevState) => {
+            return Object.assign({},prevState, {data: nextProps.types, references: nextProps.references});
+        });
     }
     onAddClick(type){
         console.log(type);
@@ -61,7 +48,7 @@ class Dictionary extends PureComponent{
                 <SortableTree
                     canDrag={false}
                     treeData={this.state.data}
-                    onChange={data => this.setState({ data })}
+                    onChange={data => this.setState((prevState) => {return Object.assign({}, prevState, data)})}
                     getNodeKey={getNodeKey}
                     generateNodeProps={({node, path}) => {
                         return {
@@ -70,15 +57,18 @@ class Dictionary extends PureComponent{
                                 let oldState = this.state.data;
                                 oldState.map((itm) => itm.style = {});
                                 oldState[0].children.map((itm) => itm.style = {});
-                                this.setState(oldState => ({
-                                    data: changeNodeAtPath({
-                                        treeData:oldState.data,
-                                        path,
-                                        getNodeKey,
-                                        newNode:{...node, style:{color:"red"}}
-                                    }),
-                                    selected:node.key
-                                }))
+                                this.setState((prevState) => {
+                                    return Object.assign({}, prevState, {
+                                        data: changeNodeAtPath(
+                                            {
+                                                treeData:oldState,
+                                                path,
+                                                getNodeKey,
+                                                newNode:{...node, style:{color:"red"}}
+                                            }),
+                                        selected:node.key
+                                    });
+                                });
                             }
                         }
                     }}
@@ -99,7 +89,7 @@ class Dictionary extends PureComponent{
                            </tr>
                            </thead>
                            <tbody>
-                           {this.state.reference.map(ref=>
+                           {this.state.references[this.state.selected] && this.state.references[this.state.selected].map(ref=>
                                <tr key={ref.key}>
                                    <td>{ref._id}</td>
                                    <td>{ref.value}</td>
