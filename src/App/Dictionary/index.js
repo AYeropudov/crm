@@ -3,6 +3,7 @@ import SortableTree,{ changeNodeAtPath } from "react-sortable-tree";
 import {getReferences} from "../../actions/apiActions";
 import {connect} from "react-redux";
 import { transliterate as tr, slugify } from 'transliteration';
+import EditReferenceForm from "./editForm";
 class Dictionary extends PureComponent{
 
     constructor(props){
@@ -10,7 +11,8 @@ class Dictionary extends PureComponent{
         this.state = {
             data:[],
             references:[],
-            selected:false
+            selected:false,
+            reference:null
         };
 
         this.onAddClick = this.onAddClick.bind(this);
@@ -27,7 +29,9 @@ class Dictionary extends PureComponent{
         });
     }
     onAddClick(type){
-        console.log(type);
+        this.setState((prevState) => {
+            return Object.assign({},prevState, {reference: {show:true, code:type, value:null}});
+        });
     }
     onEditClick(index){
         console.log(index);
@@ -110,6 +114,9 @@ class Dictionary extends PureComponent{
                        </table>
                         }
                 </div>
+                {this.state.reference && <EditReferenceForm closeHandler={()=> this.setState((prevState)=> {
+                    return Object.assign({}, prevState, {reference:null});
+                })} state={{...this.state.reference}}/>}
             </div>
         );
 
