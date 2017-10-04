@@ -24,20 +24,24 @@ class EditReferenceForm extends Component{
     }
 
     save() {
-        console.log(this.state);
+        this.props.saveHandler(this.state);
     }
 
     render() {
         return(
             <Modal show={this.state.show} onHide={this.close}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Редактор справочника</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h4>Новый элемент справочника</h4>
+                    <h4>{this.state.title}</h4>
                     <Form>
+                        <FormGroup controlId={"title"}>
+                            <ControlLabel>Значение</ControlLabel>
+                            <FormControl placeholder={"Название"} defaultValue={this.state.title} onBlur={(e) => this.setState({title:e.target.value})}/>
+                        </FormGroup>
                         <FormGroup controlId={"value"}>
-                            <ControlLabel>Название</ControlLabel>
+                            <ControlLabel>Значение</ControlLabel>
                             <FormControl placeholder={"значение"} defaultValue={this.state.value} onBlur={(e) => this.setState({value:e.target.value})}/>
                         </FormGroup>
                     </Form>
@@ -52,7 +56,8 @@ class EditReferenceForm extends Component{
 }
 EditReferenceForm.PropTypes = {
     closeHandler: React.PropTypes.func.isRequired,
-    state: React.PropTypes.object.isRequired
+    state: React.PropTypes.object.isRequired,
+    saveHandler: React.PropTypes.object.isRequired
 };
 
 export default EditReferenceForm;

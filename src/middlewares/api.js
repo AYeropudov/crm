@@ -16,6 +16,15 @@ function makeRequest(requestData) {
                 url:requestData.url,
                 method:"POST",
                 data:JSON.stringify(requestData.post),
+                params:requestData.params,
+                responseType:"json"
+            };
+        case "put":
+            return {
+                url:requestData.url,
+                method:"PUT",
+                data:JSON.stringify(requestData.post),
+                params:requestData.params,
                 responseType:"json"
             };
         case "get":
@@ -41,7 +50,7 @@ export default (store, dispatch) => next => action => {
     }
 
     return callApiRequest(RAW_DATA.request).then(
-        response => next({type:RAW_DATA.type, data: response.data}),
+        response => {if(RAW_DATA.hasOwnProperty('dispatch')){return store.dispatch(RAW_DATA.dispatch)} return next({type:RAW_DATA.type, data: response.data})},
         error => next({type:(error.response === undefined)? 'API_ERROR_CONN': "API_ERROR_"+error.response.status, ...error.response})
     )
 }
