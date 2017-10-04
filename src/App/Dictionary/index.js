@@ -1,9 +1,10 @@
 import React, {PureComponent} from 'react'
 import SortableTree, {changeNodeAtPath} from "react-sortable-tree";
-import {addReference, getReferences, putReference} from "../../actions/apiActions";
+import {addReference, getReferences, putReference, addReferenceType, putReferenceType} from "../../actions/apiActions";
 import {connect} from "react-redux";
 
 import EditReferenceForm from "./editForm";
+import EditReferenceTypeForm from "./editFormType";
 
 class Dictionary extends PureComponent {
 
@@ -13,13 +14,15 @@ class Dictionary extends PureComponent {
             data: [],
             references: [],
             selected: false,
-            reference: null
+            reference: null,
+            reference_type: null
         };
 
         this.onAddClick = this.onAddClick.bind(this);
         this.onEditClick = this.onEditClick.bind(this);
         this.onRemoveClick = this.onRemoveClick.bind(this);
-        this.saveReferense = this.saveReferense.bind(this);
+        this.saveReference = this.saveReference.bind(this);
+        this.saveReferenceType = this.saveReferenceType.bind(this);
     }
 
     componentDidMount() {
@@ -33,9 +36,30 @@ class Dictionary extends PureComponent {
     }
 
     onAddClick(type) {
-        this.setState((prevState) => {
-            return Object.assign({}, prevState, {reference: {show: true, code: type, value: null, title:"Новый элемент справочника"}});
-        });
+        if (type === 'refs'){
+            this.setState((prevState) => {
+                return Object.assign({}, prevState, {
+                    reference_type: {
+                        show: true,
+                        code: type,
+                        title: null,
+                        titleWindow: "Новый тип справочника"
+                    }
+                });
+            });
+        }
+        else {
+            this.setState((prevState) => {
+                return Object.assign({}, prevState, {
+                    reference: {
+                        show: true,
+                        code: type,
+                        value: null,
+                        title: "Новый элемент справочника"
+                    }
+                });
+            });
+        }
     }
 
     onEditClick(reference) {
@@ -48,7 +72,7 @@ class Dictionary extends PureComponent {
         console.log(index);
     }
 
-    saveReferense(data) {
+    saveReference(data) {
         this.setState((prevState) => {
             return Object.assign({}, prevState, {reference: null})
         });
@@ -56,6 +80,16 @@ class Dictionary extends PureComponent {
             this.props.dispatch(putReference(data));
         } else {
             this.props.dispatch(addReference(data));
+        }
+    }
+    saveReferenceType(data) {
+        this.setState((prevState) => {
+            return Object.assign({}, prevState, {reference_type: null})
+        });
+        if(data.hasOwnProperty('_id')){
+            this.props.dispatch(putReferenceType(data));
+        } else {
+            this.props.dispatch(addReferenceType(data));
         }
     }
 
@@ -139,10 +173,14 @@ class Dictionary extends PureComponent {
                     </table>
                     }
                 </div>
-                {this.state.reference && <EditReferenceForm saveHandler={(data) => this.saveReferense(data)}
+                {this.state.reference && <EditReferenceForm saveHandler={(data) => this.saveReference(data)}
                                                             closeHandler={() => this.setState((prevState) => {
                                                                 return Object.assign({}, prevState, {reference: null});
                                                             })} state={{...this.state.reference}}/>}
+                {this.state.reference_type && <EditReferenceTypeForm saveHandler={(data) => this.saveReferenceType(data)}
+                                                            closeHandler={() => this.setState((prevState) => {
+                                                                return Object.assign({}, prevState, {reference_type: null});
+                                                            })} state={{...this.state.reference_type}}/>}
             </div>
         );
 

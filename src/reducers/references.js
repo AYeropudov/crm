@@ -6,6 +6,13 @@ export function refs(state = Map({references:List(), types:List()}), action) {
             return state.merge(fromJS(action.data));
         case 'ADD_REFERENCE':
             return state;
+        case 'PUT_REFERENCE':
+            return state;
+        case 'PUT_REFERENCE_TYPE':
+            return state;
+        case 'ADD_REFERENCE_TYPE':
+            return state;
+
     }
     return state;
 }
