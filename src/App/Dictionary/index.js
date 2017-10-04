@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react'
 import SortableTree, {changeNodeAtPath} from "react-sortable-tree";
 import {addReference, getReferences, putReference} from "../../actions/apiActions";
 import {connect} from "react-redux";
-import {transliterate as tr, slugify} from 'transliteration';
+// import {transliterate as tr, slugify} from 'transliteration';
 import EditReferenceForm from "./editForm";
 
 class Dictionary extends PureComponent {

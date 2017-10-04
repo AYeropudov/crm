@@ -33,5 +33,11 @@
     "chai-immutable": "^1.6.0",
     "jsdom": "^11.2.0",
     "redux-devtools": "^3.4.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
   }
 }
