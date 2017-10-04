@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react'
 import SortableTree, {changeNodeAtPath} from "react-sortable-tree";
 import {addReference, getReferences, putReference} from "../../actions/apiActions";
 import {connect} from "react-redux";
-// import {transliterate as tr, slugify} from 'transliteration';
+
 import EditReferenceForm from "./editForm";
 
 class Dictionary extends PureComponent {
@@ -61,7 +61,7 @@ class Dictionary extends PureComponent {
 
     render() {
 
-        const getNodeKey = ({node: {id}}) => id;
+        const getNodeKey = ({node: {key}}) => key;
         return (
             <div className="row" style={{display: "table", width: '100%'}}>
                 <div className="col-md-4" style={{height: 16 * 42 + "px"}}>
@@ -155,10 +155,10 @@ function mapStoreToProps(store) {
     let types = props.get('types').map(itm => itm.toObject()).toArray();
     let refs = props.get('references').map(itm => itm.map(s => s.toObject())).map(itm => itm.toArray()).toObject();
     let addition = [];
-    types.forEach(itm => addition.push({code: "refs", type: 0, key: itm.key, _id: itm.key, value: itm.title}));
+    types.forEach(itm => addition.push({code: "refs", type: 0, key: itm._id, _id: itm._id, value: itm.title}));
     refs['refs'] = addition;
     return {
-        types: [{title: "Справочники", expanded: true, children: types, id: 0, key: 'refs'}],
+        types: [{title: "Справочники", expanded: true, children: types, _id: 0, key: 'refs'}],
         references: refs
     };
 
